@@ -20,7 +20,8 @@ go build
 ## Roadmap
 
 - [x] SBS client: connect to dump1090 and read messages
-- [ ] Parse SBS messages
+- [x] Parse SBS messages
+- [ ] Maintain a global map that updates aircraft details as messages arrive
 - [ ] Reconnect with backoff on connection loss
 - [ ] Publish messages to Kafka
 - [ ] Multi-receiver support: several RTL-SDR stations feeding one Kafka cluster

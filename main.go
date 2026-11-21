@@ -1,8 +1,11 @@
 package main
 
 import (
+	"adsb-pipeline/sbs"
 	"adsb-pipeline/tcpclient"
 	"fmt"
+	"log"
+	"time"
 )
 
 func main() {
@@ -13,7 +16,12 @@ func main() {
 	for {
 		select {
 		case v := <-lines:
-			fmt.Printf("buffer %3d/%d | %s\n", len(lines), cap(lines), v)
+			m, err := sbs.Parse(v, time.Now())
+			if err != nil {
+				log.Println("Error: ", err)
+			}
+
+			fmt.Println(m)
 		}
 	}
 }
