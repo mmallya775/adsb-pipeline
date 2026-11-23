@@ -76,13 +76,15 @@ func Parse(line string, receivedAt time.Time) (Message, error) {
 	}
 	m.Longitude = long
 
-	sq, err := optInt(splitLines[16])
+	// TODO Do not parse squawk code as int as it would remove the leading 0. Squawk 0602 -> 602
+	// Squawk is always 4 digits, on panel on the aircraft and also in ATC communications
+	sq, err := optInt(splitLines[17])
 	if err != nil {
 		return Message{}, fmt.Errorf("sbs: squawk: %w", err)
 	}
 	m.Squawk = sq
 
-	vs, err := optInt(splitLines[17])
+	vs, err := optInt(splitLines[16])
 	if err != nil {
 		return Message{}, fmt.Errorf("sbs: vertical speed: %w", err)
 	}
